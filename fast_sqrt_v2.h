@@ -515,7 +515,6 @@ static const uint32_t SqrtV2Table[4096] = {
 	0xa61ecdc0u,0x5b5aa313u,0xa64c1e93u,0x5b5aa03du,0xa6796dfbu,0x5b5a9d65u,0xa6a6bbf8u,0x5b5a9a8fu,
 	0xa6d40889u,0x5b5a97b9u,0xa70153afu,0x5ada94e3u,0xa72e9d6bu,0x5ada920du,0xa75be5bcu,0x5ada8f37u,
 	0xa7892ca2u,0x5ada8c63u,0xa7b6721du,0x5ada898du,0xa7e3b62eu,0x5ada86b9u,0xa810f8d5u,0x5ada83e5u,
-
 };
 
 #ifdef __GNUC__
@@ -545,8 +544,7 @@ struct SqrtV2
 
 		const uint64_t s = x >> 1;
 		const uint64_t b = x & 1;
-		const int correction = (s * (s + b) + (x << 32) + b > n) ? 1 : 0;
-		return x - correction;
+		return x - (static_cast<uint64_t>(n - (s * (s + b) + (x << 32) + b)) >> 63);
 	}
 };
 static_assert(sizeof(SqrtV2) == 8, "SqrtV2 must be 8 bytes in size, check your compiler options");
