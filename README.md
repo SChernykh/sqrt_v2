@@ -12,3 +12,8 @@ Square root for Cryptonight variant 2 - integer only operations. This code is in
 - 6 integer multiplications to calculate square root
 - First 2 pairs of multiplications can be done in parallel
 - 4 multiplications on the longest dependency chain
+
+#### SqrtV2LargeLUT::get() function (fast_sqrt_v2_large_LUT.h)
+- 256 KB LUT table
+- 2 integer multiplications to calculate square root
+- 2 multiplications on the longest dependency chain
